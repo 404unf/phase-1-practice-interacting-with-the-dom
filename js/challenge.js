@@ -1,6 +1,10 @@
 
-// Increment
-setInterval(processCounter, 1000)
+// Increment 
+let timeLord 
+start()
+function start() {
+    timeLord = setInterval(processCounter, 1000)
+}
 
 function processCounter() {
     const counter = document.getElementById('counter')
@@ -33,15 +37,15 @@ minus.addEventListener('click',processMinus)
 function processPlus() {
     const currentCounter = document.getElementById('counter')
     let newCounter = Number(currentCounter.textContent)
-    clearInterval(processCounter)
-    currentCounter.textContent = newCounter++
+    newCounter++
+    currentCounter.textContent = newCounter
 }
 
 function processMinus() {
     const currentCounter = document.getElementById('counter')
     let newCounter = Number(currentCounter.textContent)
-    clearInterval(processCounter)
-    currentCounter.textContent = newCounter--
+    newCounter--
+    currentCounter.textContent = newCounter
 }
 
 
@@ -53,13 +57,14 @@ function processPause() {
     const buttons = document.querySelectorAll('button')
 
     if (this.textContent === ' pause '){
-        buttons.forEach(button => {if(button===' pause '){} else{button.disabled = true}})
-        clearInterval(processCounter)
+        buttons.forEach(button => {
+            if(button.textContent ===' pause '){} else{button.disabled = true}})
+        clearInterval(timeLord)
         this.textContent = ' resume '
     }
     else if (this.textContent === ' resume '){
         buttons.forEach(button => button.disabled = false)
-        setInterval(processCounter, 1000);
+        start()
         this.textContent = ' pause '
     }
 }
